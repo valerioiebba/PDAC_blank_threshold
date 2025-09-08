@@ -1,5 +1,5 @@
 # PDAC_blank_threshold
-R script and related files to detect pooled blanks threshold at 99th percentile (or custom) starting from microbiome data.
+R script and related files to detect pooled blanks threshold at 99th percentile (or custom) starting from intratumoral microbiome data.
 
 === MICROBIOME CONTAMINATION THRESHOLD ANALYSIS ===
 === R SCRIPT USAGE INSTRUCTIONS ===
