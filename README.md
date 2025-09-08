@@ -25,14 +25,6 @@ Rscript blank_threshold.R \
   --threshold 99 \
   --output PDAC_intratumoral
 
-EXAMPLE WITH FULL FILE PATHS:
-
-Rscript blank_threshold.R \
-  --pos attached_assets/DF_sp_prev20_SELECTED_1756577180384.csv \
-  --blank attached_assets/DF_sp_BLANK_1756577180384.csv \
-  --md attached_assets/MD_samples_blanks_1756577180383.csv \
-  --threshold 99 \
-  --output PDAC_intratumoral
 
 COMMAND LINE OPTIONS:
 
@@ -51,6 +43,7 @@ If --output PDAC_intratumoral, creates:
   - PDAC_intratumoral.pdf (multi-page PDF)
   - PDAC_intratumoral.xlsx (Excel workbook)
   - PDAC_intratumoral.log (detailed log file)
+  - PDAC_intratumoral_Excel_Documentation.txt (explanation of each tab in the Excel file)
 
 INPUT FILE FORMATS:
 
