@@ -1,0 +1,142 @@
+[2025-09-08 12:38:25] === MICROBIOME CONTAMINATION THRESHOLD ANALYSIS ===
+[2025-09-08 12:38:25] Starting analysis...
+[2025-09-08 12:38:25] Command line arguments:
+[2025-09-08 12:38:25]   --pos: DF_sp_prev20_SELECTED.csv
+[2025-09-08 12:38:25]   --blank: DF_sp_BLANK.csv
+[2025-09-08 12:38:25]   --md: MD_samples_blanks.csv
+[2025-09-08 12:38:25]   --threshold: 99
+[2025-09-08 12:38:25]   --output: PDAC_intratumoral_UPD
+[2025-09-08 12:38:25] 
+[2025-09-08 12:38:25] Output directory: PDAC_intratumoral_UPD
+[2025-09-08 12:38:25] Excel output: PDAC_intratumoral_UPD/PDAC_intratumoral_UPD.xlsx
+[2025-09-08 12:38:25] PDF output: PDAC_intratumoral_UPD/PDAC_intratumoral_UPD.pdf
+[2025-09-08 12:38:25] Log output: PDAC_intratumoral_UPD/PDAC_intratumoral_UPD.log
+[2025-09-08 12:38:25] 
+[2025-09-08 12:38:25] STATISTICAL METHODS:
+[2025-09-08 12:38:25] - Contamination threshold: Specified percentile of blank samples
+[2025-09-08 12:38:25] - Statistical test: Mann-Whitney U test (wilcox.test) for pairwise comparisons
+[2025-09-08 12:38:25] - Multiple testing correction: Benjamini-Hochberg FDR correction (method='fdr' in p.adjust)
+[2025-09-08 12:38:25] - Effect size: Cliff's delta for pairwise comparisons
+[2025-09-08 12:38:25] - Data transformation: log1p for visualizations
+[2025-09-08 12:38:25] - Minimum sample size: 3 samples per species-cohort group
+[2025-09-08 12:38:25] 
+[2025-09-08 12:38:25] 1. Loading and preprocessing data...
+[2025-09-08 12:38:25] Loaded 768 blank samples, 149 positive samples, 909 metadata entries
+[2025-09-08 12:38:25] Using Status column as Cohort
+[2025-09-08 12:38:25] Blank cohorts identified: nfW, EB, FFPEb, PCRmix_w_nfW, PCRmix
+[2025-09-08 12:38:25] Positive cohorts identified: H_Chronic_Pancreatitis, H_Donor, H_IPMN, H_Adjuvant, H_NeoAdjuvant, M_Wildtype, M_Autophagy_deficiency, M_Tumor_precursor
+[2025-09-08 12:38:25] Added 56 missing species columns to blank data
+[2025-09-08 12:38:25] Processing 73 species across datasets
+[2025-09-08 12:38:25] 2. Converting to long format and merging with metadata...
+[2025-09-08 12:38:25] After filtering: 768 unique blank samples, 141 unique positive samples
+[2025-09-08 12:38:25] 3. Calculating contamination thresholds...
+[2025-09-08 12:38:25] Calculated 99% thresholds for 73 species
+[2025-09-08 12:38:25] 4. Performing statistical analysis...
+[2025-09-08 12:38:25] Computing descriptive statistics using parallel processing...
+[2025-09-08 12:38:26] 5. Performing pairwise comparisons with FDR correction...
+[2025-09-08 12:38:26] Using Benjamini-Hochberg FDR correction (method='fdr' in R p.adjust function)
+[2025-09-08 12:38:26] Using parallel processing with 7 cores for faster computation
+[2025-09-08 12:38:28] Performed 2044 pairwise comparisons, 108 significant after FDR correction
+[2025-09-08 12:38:28] 6. Creating ggplot2 visualizations for multi-page PDF...
+[2025-09-08 12:38:28] Including ALL species present in positive samples dataset
+[2025-09-08 12:38:28] Creating PDF with ALL 73 species from positive samples
+[2025-09-08 12:38:28] Generating plots in parallel for faster PDF creation...
+[2025-09-08 12:38:44] Added plot for species 1/73: Akkermansia_muciniphila
+[2025-09-08 12:38:45] Added plot for species 2/73: Anaerobiospirillum_succiniciproducens
+[2025-09-08 12:38:45] Added plot for species 3/73: Anaerostipes_hominis
+[2025-09-08 12:38:45] Added plot for species 4/73: Bacteroides_caecimuris
+[2025-09-08 12:38:45] Added plot for species 5/73: Bacteroides_congonensis
+[2025-09-08 12:38:45] Added plot for species 6/73: Bacteroides_heparinolyticus
+[2025-09-08 12:38:45] Added plot for species 7/73: Bacteroides_oleiciplenus
+[2025-09-08 12:38:45] Added plot for species 8/73: Bacteroides_pyogenes
+[2025-09-08 12:38:45] Added plot for species 9/73: Bacteroides_stercorirosoris
+[2025-09-08 12:38:46] Added plot for species 10/73: Bariatricus_massiliensis
+[2025-09-08 12:38:46] Added plot for species 11/73: Blautia_hominis
+[2025-09-08 12:38:46] Added plot for species 12/73: Citrobacter_koseri
+[2025-09-08 12:38:46] Added plot for species 13/73: Clostridium_innocuum
+[2025-09-08 12:38:46] Added plot for species 14/73: Clostridium_jeddahitimonense
+[2025-09-08 12:38:46] Added plot for species 15/73: Clostridium_paraputrificum
+[2025-09-08 12:38:46] Added plot for species 16/73: Clostridium_saudiense
+[2025-09-08 12:38:46] Added plot for species 17/73: Corynebacterium_simulans
+[2025-09-08 12:38:46] Added plot for species 18/73: Corynebacterium_tuberculostearicum
+[2025-09-08 12:38:46] Added plot for species 19/73: Cutibacterium_acnes
+[2025-09-08 12:38:46] Added plot for species 20/73: Duncaniella_dubosii
+[2025-09-08 12:38:47] Added plot for species 21/73: Duncaniella_muricolitica
+[2025-09-08 12:38:47] Added plot for species 22/73: Enterobacter_bugandensis
+[2025-09-08 12:38:47] Added plot for species 23/73: Enterobacter_cloacae
+[2025-09-08 12:38:47] Added plot for species 24/73: Enterobacter_kobei
+[2025-09-08 12:38:47] Added plot for species 25/73: Enterobacter_quasihormaechei
+[2025-09-08 12:38:47] Added plot for species 26/73: Enterocloster_aldenensis
+[2025-09-08 12:38:47] Added plot for species 27/73: Enterococcus_faecalis
+[2025-09-08 12:38:47] Added plot for species 28/73: Enterococcus_gallinarum
+[2025-09-08 12:38:47] Added plot for species 29/73: Enterococcus_hirae
+[2025-09-08 12:38:47] Added plot for species 30/73: Enterococcus_innesii
+[2025-09-08 12:38:48] Added plot for species 31/73: Enterococcus_mundtii
+[2025-09-08 12:38:48] Added plot for species 32/73: Enterococcus_saigonensis
+[2025-09-08 12:38:48] Added plot for species 33/73: Escherichia_fergusonii
+[2025-09-08 12:38:48] Added plot for species 34/73: Extibacter_muris
+[2025-09-08 12:38:48] Added plot for species 35/73: Faecalibacterium_duncaniae
+[2025-09-08 12:38:48] Added plot for species 36/73: Faecalibacterium_longum
+[2025-09-08 12:38:48] Added plot for species 37/73: Flavonifractor_plautii
+[2025-09-08 12:38:48] Added plot for species 38/73: Flintibacter_butyricus
+[2025-09-08 12:38:48] Added plot for species 39/73: Fusobacterium_mortiferum
+[2025-09-08 12:38:48] Added plot for species 40/73: Fusobacterium_necrophorum
+[2025-09-08 12:38:48] Added plot for species 41/73: Fusobacterium_perfoetens
+[2025-09-08 12:38:49] Added plot for species 42/73: Fusobacterium_simiae
+[2025-09-08 12:38:49] Added plot for species 43/73: Klebsiella_pasteurii
+[2025-09-08 12:38:49] Added plot for species 44/73: Kluyvera_sichuanensis
+[2025-09-08 12:38:49] Added plot for species 45/73: Lactobacillus_crispatus
+[2025-09-08 12:38:49] Added plot for species 46/73: Lawsonella_clevelandensis
+[2025-09-08 12:38:49] Added plot for species 47/73: Leclercia_adecarboxylata
+[2025-09-08 12:38:49] Added plot for species 48/73: Leptotrichia_hongkongensis
+[2025-09-08 12:38:49] Added plot for species 49/73: Ligilactobacillus_apodemi
+[2025-09-08 12:38:49] Added plot for species 50/73: Limosilactobacillus_urinaemulieris
+[2025-09-08 12:38:49] Added plot for species 51/73: Mediterraneibacter_gnavus
+[2025-09-08 12:38:50] Added plot for species 52/73: Microvirga_massiliensis
+[2025-09-08 12:38:50] Added plot for species 53/73: Morganella_morganii
+[2025-09-08 12:38:50] Added plot for species 54/73: Muribaculum_intestinale
+[2025-09-08 12:38:50] Added plot for species 55/73: Parabacteroides_distasonis
+[2025-09-08 12:38:50] Added plot for species 56/73: Paramuribaculum_intestinale
+[2025-09-08 12:38:50] Added plot for species 57/73: Parasutterella_excrementihominis
+[2025-09-08 12:38:50] Added plot for species 58/73: Peptacetobacter_hiranonis
+[2025-09-08 12:38:50] Added plot for species 59/73: Peptoniphilus_indolicus
+[2025-09-08 12:38:50] Added plot for species 60/73: Phocaeicola_vulgatus
+[2025-09-08 12:38:50] Added plot for species 61/73: Porphyromonas_endodontalis
+[2025-09-08 12:38:50] Added plot for species 62/73: Prevotellamassilia_timonensis
+[2025-09-08 12:38:51] Added plot for species 63/73: Raoultella_ornithinolytica
+[2025-09-08 12:38:51] Added plot for species 64/73: Romboutsia_timonensis
+[2025-09-08 12:38:51] Added plot for species 65/73: Ruminococcus_torques
+[2025-09-08 12:38:51] Added plot for species 66/73: Salmonella_enterica
+[2025-09-08 12:38:51] Added plot for species 67/73: Sangeribacter_muris
+[2025-09-08 12:38:51] Added plot for species 68/73: Segatella_copri
+[2025-09-08 12:38:51] Added plot for species 69/73: Staphylococcus_capitis
+[2025-09-08 12:38:51] Added plot for species 70/73: Staphylococcus_epidermidis
+[2025-09-08 12:38:51] Added plot for species 71/73: Trueperella_pyogenes
+[2025-09-08 12:38:51] Added plot for species 72/73: Turicimonas_muris
+[2025-09-08 12:38:52] Added plot for species 73/73: Zhenhengia_yiwuensis
+[2025-09-08 12:38:52] Multi-page PDF created with 73 species: PDAC_intratumoral_UPD/PDAC_intratumoral_UPD.pdf
+[2025-09-08 12:38:52] 7. Creating Excel report...
+[2025-09-08 12:38:53] Excel report saved: PDAC_intratumoral_UPD/PDAC_intratumoral_UPD.xlsx
+[2025-09-08 12:38:53] 8. Generating Excel file documentation...
+[2025-09-08 12:38:53] Excel documentation saved: PDAC_intratumoral_UPD/PDAC_intratumoral_UPD_Excel_Documentation.txt
+[2025-09-08 12:38:53] 
+[2025-09-08 12:38:53] === ANALYSIS COMPLETE ===
+[2025-09-08 12:38:53] Analysis completed successfully on: 2025-09-08 12:38:53
+[2025-09-08 12:38:53] - Species analyzed: 73
+[2025-09-08 12:38:53] - Species with thresholds: 73
+[2025-09-08 12:38:53] - Total pairwise comparisons: 2044
+[2025-09-08 12:38:53] - Significant comparisons (FDR < 0.05): 108
+[2025-09-08 12:38:53] - All species included in PDF: 73
+[2025-09-08 12:38:53] 
+[2025-09-08 12:38:53] OUTPUT FILES:
+[2025-09-08 12:38:53] - Multi-page PDF: PDAC_intratumoral_UPD/PDAC_intratumoral_UPD.pdf
+[2025-09-08 12:38:53] - Excel report: PDAC_intratumoral_UPD/PDAC_intratumoral_UPD.xlsx
+[2025-09-08 12:38:53] - Excel documentation: PDAC_intratumoral_UPD/PDAC_intratumoral_UPD_Excel_Documentation.txt
+[2025-09-08 12:38:53] - Log file: PDAC_intratumoral_UPD/PDAC_intratumoral_UPD.log
+[2025-09-08 12:38:53] 
+[2025-09-08 12:38:53] PDF MODIFICATIONS:
+[2025-09-08 12:38:53] - Removed Cliff's delta from plot annotations
+[2025-09-08 12:38:53] - Positioned P-values above violin/box plots to avoid superimposition
+[2025-09-08 12:38:53] - Included ALL species from positive samples dataset
+[2025-09-08 12:38:53] 
+[2025-09-08 12:38:53] Analysis completed successfully!

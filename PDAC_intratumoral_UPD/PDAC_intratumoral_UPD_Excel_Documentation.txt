@@ -1,0 +1,219 @@
+===============================================================================
+EXCEL FILE DOCUMENTATION: MICROBIOME CONTAMINATION THRESHOLD ANALYSIS
+===============================================================================
+
+Analysis Date: 2025-09-08 12:38:53
+Excel File: PDAC_intratumoral_UPD.xlsx
+Analysis Parameters: 99% threshold, Mann-Whitney U test with FDR correction
+
+===============================================================================
+TAB 1: ANALYSIS_OVERVIEW
+===============================================================================
+PURPOSE: Summary of analysis parameters and key results
+
+COLUMNS:
+- Parameter: Analysis setting or result type
+- Value: Corresponding value or description
+
+KEY INFORMATION:
+- Analysis type and statistical methods used
+- Input files and contamination threshold settings
+- Summary counts of species, samples, and significant results
+
+===============================================================================
+TAB 2: SUMMARY_STATISTICS
+===============================================================================
+PURPOSE: Comprehensive statistical summary for positive sample species-cohort combinations
+
+COLUMNS:
+- Species: Bacterial species name
+- Cohort: Sample group/category (positive samples only)
+- sample_count: Number of samples in this species-cohort combination
+- mean_abundance: Mean relative abundance value (6 decimal precision)
+- median_abundance: Median relative abundance value (6 decimal precision)
+- std_dev: Standard deviation of relative abundance (6 decimal precision)
+- min_abundance: Minimum relative abundance value (6 decimal precision)
+- max_abundance: Maximum relative abundance value (6 decimal precision)
+- q25_abundance: 25th percentile/first quartile (6 decimal precision)
+- q75_abundance: 75th percentile/third quartile (6 decimal precision)
+- threshold_percentile: Contamination threshold for this species
+- samples_above_threshold: Number of samples exceeding contamination threshold
+- fraction_above_threshold: Proportion of samples above threshold (4 decimal precision)
+- strict_fraction_above_threshold: Adjusted fraction handling zero thresholds (4 decimal precision)
+
+NOTES:
+- Only includes POSITIVE samples (tissue/biological samples)
+- Only species-cohort combinations with ≥3 samples included
+- Main results table combining descriptive stats with contamination assessment
+
+===============================================================================
+TAB 3: CONTAMINATION_THRESHOLDS
+===============================================================================
+PURPOSE: Contamination threshold values calculated from blank samples
+
+COLUMNS:
+- Species: Bacterial species name
+- Blank_threshold: 99% percentile of pooled blank samples
+- n_blank_samples: Number of blank samples used for threshold calculation
+- Threshold_Percentile: The percentile used (99%)
+
+NOTES:
+- Thresholds calculated using ALL blank samples pooled together
+- Critical reference values for contamination assessment
+- Used to determine which positive samples exceed background levels
+
+===============================================================================
+TAB 4: PAIRWISE_COMPARISONS
+===============================================================================
+PURPOSE: Statistical significance testing between all positive sample groups
+
+COLUMNS:
+- Species: Bacterial species name
+- comparison: Description of comparison ('Cohort1 vs Cohort2' format)
+- Cohort1: First comparison group name
+- Cohort2: Second comparison group name
+- n1: Sample size in first group
+- n2: Sample size in second group
+- mann_whitney_u: Mann-Whitney U test statistic (numeric)
+- p_value_formatted: Raw p-value ('<0.001' or 3 decimal places)
+- p_adj_fdr_formatted: FDR-adjusted p-value ('<0.001' or 3 decimal places)
+- cliffs_delta_formatted: Effect size measure ('NA' or 3 decimal places)
+- significance: 'Significant' or 'Not Significant' based on FDR < 0.05
+
+STATISTICAL METHODS:
+- Test: Mann-Whitney U test (non-parametric, wilcox.test in R)
+- Multiple testing correction: Benjamini-Hochberg FDR (p.adjust method='fdr')
+- Significance threshold: FDR-adjusted p-value < 0.05
+- Effect size: Cliff's delta (-1 to +1 scale, measures non-parametric effect)
+
+===============================================================================
+TAB 5: SIGNIFICANT_RESULTS
+===============================================================================
+PURPOSE: Filtered view of statistically significant comparisons only
+
+CONTENT: Subset of Pairwise_Comparisons tab showing only significant results
+FILTERING: Only comparisons with FDR-adjusted p < 0.05
+
+UTILITY:
+- Quick identification of meaningful differences
+- Reduced dataset for focused analysis
+- Priority results for biological interpretation
+
+===============================================================================
+TAB 6: POSITIVE_SAMPLE_STATS
+===============================================================================
+PURPOSE: Detailed descriptive statistics for positive samples only
+
+COLUMNS:
+- Species: Bacterial species name
+- Cohort: Positive sample group (tissue/biological samples)
+- n: Number of samples in this species-cohort combination
+- mean: Mean relative abundance (raw values, not rounded)
+- median: Median relative abundance (raw values, not rounded)
+- sd: Standard deviation of relative abundance (raw values, not rounded)
+- min: Minimum relative abundance value (raw values, not rounded)
+- max: Maximum relative abundance value (raw values, not rounded)
+- q25: 25th percentile/first quartile (raw values, not rounded)
+- q75: 75th percentile/third quartile (raw values, not rounded)
+
+SAMPLE TYPES INCLUDED:
+- Positive cohorts: H_Chronic_Pancreatitis, H_Donor, H_IPMN, H_Adjuvant, H_NeoAdjuvant, M_Wildtype, M_Autophagy_deficiency, M_Tumor_precursor
+
+NOTES:
+- Only species-cohort combinations with ≥3 samples included
+- Raw statistical values (higher precision than Summary_Statistics tab)
+
+===============================================================================
+TAB 7: BLANK_SAMPLE_STATS
+===============================================================================
+PURPOSE: Detailed descriptive statistics for blank control samples only
+
+COLUMNS:
+- Species: Bacterial species name
+- Cohort: Blank sample group (control samples)
+- n: Number of samples in this species-cohort combination
+- mean: Mean relative abundance (raw values, not rounded)
+- median: Median relative abundance (raw values, not rounded)
+- sd: Standard deviation of relative abundance (raw values, not rounded)
+- min: Minimum relative abundance value (raw values, not rounded)
+- max: Maximum relative abundance value (raw values, not rounded)
+- q25: 25th percentile/first quartile (raw values, not rounded)
+- q75: 75th percentile/third quartile (raw values, not rounded)
+
+SAMPLE TYPES INCLUDED:
+- Blank cohorts: nfW, EB, FFPEb, PCRmix_w_nfW, PCRmix
+
+UTILITY:
+- Assessment of background contamination levels in control samples
+- Quality control evaluation of blank performance
+- Raw data used for contamination threshold calculations
+- Only species-cohort combinations with ≥3 samples included
+
+===============================================================================
+TAB 8: VIOLIN_PLOT_RAW_DATA
+===============================================================================
+PURPOSE: Complete raw data used for PDF violin plot generation
+
+COLUMNS:
+- Group: Individual sample identifier (unique sample ID)
+- Species: Bacterial species name
+- Cohort: Sample group/category (e.g., H_Donor, nfW, EB, etc.)
+- RelAbund: Raw relative abundance value (exact values used in plots)
+- Sample_Type: 'Positive' or 'Blank' classification based on source file
+
+CONTENT:
+- ALL individual data points displayed in PDF violin plots
+- Combined positive and blank samples in single table
+- Sorted by Species, Sample_Type, Cohort, Group for easy navigation
+- Exact data used for log₁₀(RelAbund + 1) transformation in visualizations
+
+UTILITY:
+- Complete reproducibility of PDF plots
+- Custom visualization and analysis capability
+- Data verification and quality control
+- Full traceability of all plotted points
+
+===============================================================================
+DATA PROCESSING AND QUALITY CONTROL
+===============================================================================
+
+SAMPLE CLASSIFICATION:
+- Blank samples: Determined by source file (DF_sp_BLANK.csv)
+- Positive samples: Determined by source file (DF_sp_prev20_SELECTED.csv)
+- Metadata: Used only for cohort assignment (MD_samples_blanks.csv)
+
+FILTERING CRITERIA:
+- Minimum sample size: 3 samples per species-cohort group
+- Negative abundance values: Set to zero
+- Missing species: Added with zero values
+
+STATISTICAL METHODS:
+- Contamination threshold: 99% percentile of pooled blank samples
+- Statistical test: Mann-Whitney U test (wilcox.test in R)
+- Multiple testing correction: Benjamini-Hochberg FDR (p.adjust method='fdr')
+- Effect size: Cliff's delta
+- Significance level: FDR-adjusted p < 0.05
+
+DATA TRANSFORMATIONS:
+- Visualization: log₁₀(relative abundance + 1) for PDF plots only
+- Analysis: Raw relative abundance values used for statistics
+- Thresholds: Applied to raw values, not transformed data
+
+===============================================================================
+FILE INTEGRATION
+===============================================================================
+
+RELATED OUTPUT FILES:
+- Multi-page PDF: PDAC_intratumoral_UPD.pdf
+- Analysis log: PDAC_intratumoral_UPD.log
+- R script: DF_sp_prev20_SELECTED.csv
+
+REPRODUCIBILITY:
+- All parameters logged and documented
+- Complete data lineage maintained
+- Statistical methods explicitly defined
+- Quality control steps documented
+
+===============================================================================
+Documentation generated: 2025-09-08 12:38:53
+===============================================================================
