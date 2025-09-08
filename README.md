@@ -1,2 +1,115 @@
 # PDAC_blank_threshold
 R script and related files to detect pooled blanks threshold at 99th percentile (or custom) starting from microbiome data.
+
+=== MICROBIOME CONTAMINATION THRESHOLD ANALYSIS ===
+=== R SCRIPT USAGE INSTRUCTIONS ===
+
+OVERVIEW:
+This R script reproduces microbiome contamination threshold analysis, generating 
+multi-page PDF output and Excel file. The script analyzes contamination thresholds 
+to distinguish genuine bacterial abundances from contaminants across blank sample classes.
+
+REQUIREMENTS:
+- R (version 3.5 or higher)
+- Ubuntu/Linux operating system
+- Required R packages (automatically installed):
+  - data.table, openxlsx, ggplot2, optparse
+  - dplyr, tidyr, cowplot, effsize, stringr, scales, RColorBrewer, gridExtra, grid
+
+NEW COMMAND LINE USAGE:
+
+Rscript blank_threshold.R \
+  --pos DF_sp_prev20_SELECTED.csv \
+  --blank DF_sp_BLANK.csv \
+  --md MD_samples_blanks.csv \
+  --threshold 99 \
+  --output PDAC_intratumoral
+
+EXAMPLE WITH FULL FILE PATHS:
+
+Rscript blank_threshold.R \
+  --pos attached_assets/DF_sp_prev20_SELECTED_1756577180384.csv \
+  --blank attached_assets/DF_sp_BLANK_1756577180384.csv \
+  --md attached_assets/MD_samples_blanks_1756577180383.csv \
+  --threshold 99 \
+  --output PDAC_intratumoral
+
+COMMAND LINE OPTIONS:
+
+--pos           Path to positive samples CSV file (REQUIRED)
+--blank         Path to blank samples CSV file (REQUIRED)  
+--md            Path to metadata CSV file with Group and Cohort columns (REQUIRED)
+--threshold     Percentile for blank threshold (0-99). Default: 99
+--output        Output folder name (used for all output files). Default: microbiome_analysis
+
+OUTPUT FILES:
+The script creates a folder with the name specified by --output parameter.
+All output files use the same name as the folder:
+
+If --output PDAC_intratumoral, creates:
+- PDAC_intratumoral/
+  - PDAC_intratumoral.pdf (multi-page PDF)
+  - PDAC_intratumoral.xlsx (Excel workbook)
+  - PDAC_intratumoral.log (detailed log file)
+
+INPUT FILE FORMATS:
+
+1. Positive Samples CSV: Contains Group column + species abundance columns
+2. Blank Samples CSV: Contains Group column + species abundance columns  
+3. Metadata CSV: Contains Group and Cohort columns for sample classification
+
+PDF OUTPUT FEATURES:
+
+- ALL species from positive samples dataset included (not just significant ones)
+- Each page shows one species with violin + box plots
+- Top panel: Positive samples with statistical annotations
+- Bottom panel: Blank samples
+- P-values positioned ABOVE plots (no superimposition)
+- Cliff's delta removed from annotations (P-values only)
+- Red threshold lines at specified percentile
+
+EXCEL WORKBOOK SHEETS:
+
+1. Analysis_Overview: Parameters, methods, and summary statistics
+2. Summary_Statistics: Main results with thresholds and counts
+3. Contamination_Thresholds: Percentile values per species
+4. Pairwise_Comparisons: ALL Mann-Whitney U test results with FDR values
+5. Significant_Results: Only FDR < 0.05 results
+6. Positive_Sample_Stats: Descriptive statistics for positive samples
+7. Blank_Sample_Stats: Descriptive statistics for blank samples
+
+LOG FILE DETAILS:
+
+- Comprehensive logging of all analysis steps
+- FDR method specification: Benjamini-Hochberg (method='fdr' in R p.adjust)
+- Sample counts and filtering information
+- Statistical method documentation
+- Error messages and warnings
+
+ANALYSIS METHODS:
+
+- Contamination threshold: Specified percentile of blank samples (default 99th)
+- Statistical test: Mann-Whitney U test for pairwise comparisons
+- Multiple testing correction: Benjamini-Hochberg FDR correction (standard method)
+- Effect size: Cliff's delta calculated but not shown in PDF plots
+- Minimum sample size: 3 samples per species-cohort group
+- Data transformation: log1p for visualizations
+
+CORRESPONDENCE CHECK:
+The script ensures correspondence between Excel results and PDF plots:
+- ALL species in positive samples are included in PDF
+- Pairwise comparison results in Excel match species shown in PDF
+- FDR values in Excel correspond to P-value annotations in PDF
+
+TROUBLESHOOTING:
+
+- Ensure all input files exist and paths are correct
+- Check that CSV files have proper Group and Cohort columns
+- Verify R is installed and accessible via Rscript command
+- Required packages will be automatically installed on first run
+- Output folder will be created automatically
+- Check log file for detailed error messages and analysis progress
+
+For help with command options:
+Rscript blank_threshold.R --help
+
